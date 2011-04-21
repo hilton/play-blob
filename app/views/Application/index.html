@@ -3,12 +3,20 @@
 
 <p>
 #{list items:models.User.findAll(), as:'user'}
-    <img title="User ${user.id}" src="@{Application.userPhoto(user.id)}" />
+	<a href="@{downloadUserPhoto(user.id)}"><img title="${user.photoFileName}" src="@{Application.userPhoto(user.id)}"></a>
 #{/list}
 </p>
 
 #{form @Application.addUser(), enctype:'multipart/form-data'}
-    <p><label for="photo">Photo:</label></p>
-    <p><input id="photo" type="file" name="user.photo" /></p>
-    <p><input type="submit" name="submit" value="Save" /></p>
+    <p>
+		<input id="photo" type="file" name="user.photo">
+    	<input type="submit" name="submit" value="Upload">
+    </p>
+#{/form}
+
+#{form @addUserWithFileName(), enctype:'multipart/form-data'}
+	<p>
+		<input id="photo" type="file" name="photo">
+		<input type="submit" name="submit" value="Upload">
+	</p>
 #{/form}
