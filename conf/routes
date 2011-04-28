@@ -1,7 +1,9 @@
 GET /									Application.index
 POST /									Application.addUser
+POST /user							Application.updateUser
 POST /name							Application.addUserWithFileName
 GET /photo/{id}					Application.userPhoto
+DELETE /user						Application.deleteUser
 GET /photo/{id}/download		Application.downloadUserPhoto
 
 GET     /public/                                staticDir:public

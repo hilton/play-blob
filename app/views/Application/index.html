@@ -1,22 +1,43 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+
+<h1>List</h1>
 <p>
 #{list items:models.User.findAll(), as:'user'}
 	<a href="@{downloadUserPhoto(user.id)}"><img title="${user.photoFileName}" src="@{Application.userPhoto(user.id)}"></a>
 #{/list}
 </p>
 
+<h1>Add user</h1>
 #{form @Application.addUser(), enctype:'multipart/form-data'}
     <p>
-		<input id="photo" type="file" name="user.photo">
+		<input type="file" name="user.photo">
     	<input type="submit" name="submit" value="Upload">
     </p>
 #{/form}
 
+<h1>Add user with file name</h1>
 #{form @addUserWithFileName(), enctype:'multipart/form-data'}
 	<p>
-		<input id="photo" type="file" name="photo">
+		<input type="file" name="photo">
 		<input type="submit" name="submit" value="Upload">
+	</p>
+#{/form}
+
+<h1>Update user</h1>
+#{form @updateUser(), enctype:'multipart/form-data'}
+	<p>
+		#{select 'user.id', items:models.User.findAll(), valueProperty:'id', labelProperty:'id' /}
+		<input type="file" name="user.photo">
+		<input type="submit" name="submit" value="Update User">
+	</p>
+#{/form}
+
+<h1>Delete user</h1>
+#{form @deleteUser()}
+	<p>
+		#{select 'id', items:models.User.findAll(), valueProperty:'id', labelProperty:'id' /}
+		<input type="submit" name="submit" value="Delete">
 	</p>
 #{/form}
